@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FamilyStrip } from "@/components/FamilyStrip";
 
 export const metadata: Metadata = {
   title: "Research — B12 Labs",
@@ -38,45 +39,51 @@ const papers = [
 
 export default function ResearchPage() {
   return (
-    <div className="w-full px-6 lg:px-8 py-16">
-      <div className="max-w-5xl">
-        <h1 className="text-[40px] font-bold tracking-tight text-stone-900 dark:text-stone-50">
-          Research
-        </h1>
-        <p className="mt-4 text-[17px] text-stone-600 dark:text-stone-400 leading-relaxed max-w-2xl">
-          Open notes from the lab. We publish the ideas, ship the implementations, and keep learning
-          from the feedback.
-        </p>
-      </div>
-      <div className="mt-12 space-y-4 max-w-5xl">
-        {papers.map((p) => {
-          const Tag = p.url ? "a" : "div";
-          return (
-            <Tag
-              key={p.title}
-              {...(p.url ? { href: p.url, target: "_blank", rel: "noreferrer" } : {})}
-              className={`block p-7 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 ${
-                p.url ? "hover:border-stone-300 dark:hover:border-stone-700 transition-colors" : ""
-              }`}
-            >
-              <div className="flex items-baseline justify-between gap-3 flex-wrap">
-                <h2 className="text-[18px] font-bold text-stone-900 dark:text-stone-50">{p.title}</h2>
+    <>
+      <div className="w-full px-6 lg:px-8 pt-28 pb-16">
+        <div className="max-w-5xl mx-auto text-center">
+          <span className="text-[10px] font-bold uppercase tracking-[2px] text-[color:var(--brand-solid)]">
+            Research
+          </span>
+          <h1 className="mt-3 text-[40px] md:text-[48px] font-bold tracking-tight leading-[1.05] text-stone-900 dark:text-stone-50">
+            Open notes from the lab
+          </h1>
+          <p className="mt-6 text-[17px] text-stone-600 dark:text-stone-400 leading-relaxed max-w-2xl mx-auto">
+            We publish the ideas, ship the implementations, and keep learning from the feedback.
+          </p>
+        </div>
+
+        <div className="mt-14 space-y-5 max-w-4xl mx-auto">
+          {papers.map((p) => {
+            const Tag = p.url ? "a" : "div";
+            return (
+              <Tag
+                key={p.title}
+                {...(p.url ? { href: p.url, target: "_blank", rel: "noreferrer" } : {})}
+                className={`block p-8 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-center ${
+                  p.url ? "hover:border-stone-300 dark:hover:border-stone-700 transition-colors" : ""
+                }`}
+              >
                 <span className="text-[11px] font-mono text-stone-500 uppercase tracking-wider">
                   {p.status}
                 </span>
-              </div>
-              <p className="mt-3 text-[14px] text-stone-600 dark:text-stone-400 leading-relaxed">
-                {p.body}
-              </p>
-              {p.url && (
-                <div className="mt-3 text-[12px] font-semibold text-[color:var(--brand-solid)]">
-                  Read →
-                </div>
-              )}
-            </Tag>
-          );
-        })}
+                <h2 className="mt-2 text-[20px] font-bold text-stone-900 dark:text-stone-50">
+                  {p.title}
+                </h2>
+                <p className="mt-3 text-[14px] text-stone-600 dark:text-stone-400 leading-relaxed max-w-2xl mx-auto">
+                  {p.body}
+                </p>
+                {p.url && (
+                  <div className="mt-4 text-[12px] font-semibold text-[color:var(--brand-solid)]">
+                    Read →
+                  </div>
+                )}
+              </Tag>
+            );
+          })}
+        </div>
       </div>
-    </div>
+      <FamilyStrip label="Research ships inside" />
+    </>
   );
 }

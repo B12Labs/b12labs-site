@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Brain, Cpu, Database } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { HeroBg } from "@/components/HeroBg";
+import { FamilyStrip } from "@/components/FamilyStrip";
+import { Logo } from "@/components/Logo";
 
 const products = [
   {
@@ -8,23 +10,26 @@ const products = [
     domain: "boss.ceo",
     desc: "The AI-native operating system. 35 studios: Voice, Movie, Scribe, Agents, Personas, Capture, Meet, and more.",
     href: "https://boss.ceo",
-    icon: Brain,
+    mark: "boss",
+    accent: "from-teal-500 to-teal-700",
   },
   {
     name: "Cintrico",
     domain: "cintrico.com",
     desc: "Enterprise-tier BOSS with BYOK encryption, Cintrico-managed keys, centralized spend, SOC 2, HIPAA BAA.",
     href: "https://cintrico.com",
-    icon: Cpu,
+    mark: "cintrico",
+    accent: "from-violet-500 to-indigo-700",
   },
   {
     name: "Engram",
     domain: "github.com/B12Labs/engram",
     desc: "Portable, graph-compressed, single-file memory for AI agents. 97% smaller than vector DBs. Sub-ms recall. MIT.",
     href: "https://github.com/B12Labs/engram",
-    icon: Database,
+    mark: "engram",
+    accent: "from-rose-500 to-pink-700",
   },
-];
+] as const;
 
 const pillars = [
   {
@@ -44,23 +49,43 @@ const pillars = [
   },
 ];
 
+function ProductMark({ mark }: { mark: "boss" | "cintrico" | "engram" }) {
+  if (mark === "cintrico") {
+    return (
+      <div className="flex items-center gap-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://cintrico.com/cintrico-icon.png?v=2"
+          alt=""
+          className="w-10 h-10 object-contain"
+        />
+      </div>
+    );
+  }
+  if (mark === "boss") {
+    return (
+      <div className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 text-white shadow-lg shadow-teal-500/30 font-bold text-[14px]">
+        B
+      </div>
+    );
+  }
+  return (
+    <div className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-700 text-white shadow-lg shadow-violet-500/30 font-bold text-[14px]">
+      E
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <div>
       {/* ── HERO ───────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 text-center overflow-hidden -mt-14 pt-14">
+      <section className="relative min-h-screen flex items-center justify-center px-4 text-center overflow-hidden">
         <HeroBg />
 
         <div className="relative z-10 max-w-4xl mx-auto pb-16">
           <div className="flex flex-col items-center gap-3 mb-8 hero-entrance-logo">
-            <div className="flex items-center gap-2.5">
-              <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-teal-400 to-teal-700 text-white text-[11px] font-bold tracking-tight shadow-lg shadow-teal-500/40">
-                B12
-              </span>
-              <span className="text-lg font-bold tracking-tight text-white">
-                B12<span className="text-teal-400">Labs</span>
-              </span>
-            </div>
+            <Logo size={48} showWordmark inverted />
           </div>
 
           <div className="hero-entrance-pill mb-6">
@@ -136,19 +161,19 @@ export default function HomePage() {
                 href={p.href}
                 target="_blank"
                 rel="noreferrer"
-                className={`pillar-card pillar-reveal-${i + 1} group block p-7 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800`}
+                className={`pillar-card pillar-reveal-${i + 1} group block p-7 rounded-2xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-center`}
               >
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-11 h-11 grid place-items-center rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 text-white shadow-lg shadow-teal-500/30">
-                    <p.icon className="w-5 h-5" />
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-stone-400 group-hover:text-[color:var(--brand-solid)] group-hover:translate-x-0.5 transition-all" />
+                <div className="flex items-center justify-center mb-5">
+                  <ProductMark mark={p.mark as "boss" | "cintrico" | "engram"} />
                 </div>
                 <div className="text-[19px] font-bold text-stone-900 dark:text-stone-50">{p.name}</div>
                 <div className="text-[11px] font-mono text-stone-500 mt-0.5">{p.domain}</div>
                 <p className="mt-3 text-[13px] text-stone-600 dark:text-stone-400 leading-relaxed">
                   {p.desc}
                 </p>
+                <div className="mt-5 inline-flex items-center gap-1 text-[12px] font-semibold text-[color:var(--brand-solid)] group-hover:gap-2 transition-all">
+                  Visit <ArrowRight className="w-3.5 h-3.5" />
+                </div>
               </a>
             ))}
           </div>
@@ -157,21 +182,19 @@ export default function HomePage() {
 
       {/* ── THESIS ───────────────────────────────────── */}
       <section className="relative w-full px-6 lg:px-8 py-24 border-t border-stone-200 dark:border-stone-800">
-        <div className="max-w-5xl mx-auto">
-          <div className="mb-12">
-            <span className="text-[10px] font-bold uppercase tracking-[2px] text-[color:var(--brand-solid)]">
-              Our thesis
-            </span>
-            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-50 max-w-2xl">
-              The cognitive layer software has been missing since the 1970s
-            </h2>
-          </div>
+        <div className="max-w-5xl mx-auto text-center">
+          <span className="text-[10px] font-bold uppercase tracking-[2px] text-[color:var(--brand-solid)]">
+            Our thesis
+          </span>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-stone-900 dark:text-stone-50 max-w-2xl mx-auto">
+            The cognitive layer software has been missing since the 1970s
+          </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-10 text-left md:text-center">
             {pillars.map((p) => (
               <div key={p.title}>
                 <div className="text-[16px] font-bold text-stone-900 dark:text-stone-50">{p.title}</div>
-                <p className="mt-2 text-[14px] text-stone-600 dark:text-stone-400 leading-relaxed">
+                <p className="mt-2 text-[14px] text-stone-600 dark:text-stone-400 leading-relaxed max-w-xs md:mx-auto">
                   {p.body}
                 </p>
               </div>
@@ -180,16 +203,19 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── FAMILY STRIP ─────────────────────────────── */}
+      <FamilyStrip />
+
       {/* ── HIRING ───────────────────────────────────── */}
       <section className="relative w-full px-6 lg:px-8 py-24 border-t border-stone-200 dark:border-stone-800">
         <div className="max-w-5xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-950 via-stone-950 to-stone-900 border border-teal-900/40 p-12 sm:p-16 text-white">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-950 via-stone-950 to-stone-900 border border-teal-900/40 p-12 sm:p-16 text-white text-center">
             <div className="hero-mesh" aria-hidden />
             <div className="relative">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight max-w-2xl mx-auto">
                 We&apos;re hiring researchers, engineers, and designers.
               </h2>
-              <p className="mt-4 text-[15px] text-stone-300 max-w-2xl">
+              <p className="mt-4 text-[15px] text-stone-300 max-w-2xl mx-auto">
                 Help us build the cognitive layer that software has been missing since the 1970s.
                 Remote-first, ship weekly, equity that matters.
               </p>
