@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+build
+*.log
+.env*.local
+.vercel
+.DS_Store
+.turbo
+dist
+coverage
+.commit-msg.tmp

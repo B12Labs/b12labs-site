@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --brand-solid: #0F8A8A;
+  --brand-solid-hover: #0a6e6e;
+  --brand-primary: #5DCAA5;
+  --brand-secondary: rgba(93, 202, 165, 0.12);
+  --bg: #FAFAF8;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #57534e;
+  --border: #e7e5e4;
+  --border-subtle: #f5f5f4;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.dark {
+  --brand-solid: #14B8B8;
+  --brand-solid-hover: #0F9A9A;
+  --brand-primary: #6DD8B5;
+  --brand-secondary: rgba(109, 216, 181, 0.15);
+  --bg: #0c0a09;
+  --surface: #1c1917;
+  --text: #fafaf9;
+  --text-secondary: #a8a29e;
+  --border: #292524;
+  --border-subtle: #1c1917;
+}
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hero mesh gradient — soft brand-colored blobs */
+@keyframes meshFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, -30px) scale(1.08); }
+  66% { transform: translate(-30px, 20px) scale(0.96); }
+}
+@keyframes meshFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-40px, 30px) scale(0.92); }
+  66% { transform: translate(30px, -20px) scale(1.12); }
+}
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-mesh::before,
+.hero-mesh::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+.hero-mesh::before {
+  width: 520px;
+  height: 520px;
+  top: -8%;
+  left: 8%;
+  background: radial-gradient(circle, rgba(93, 202, 165, 0.45) 0%, transparent 70%);
+  animation: meshFloat1 18s ease-in-out infinite;
+}
+.hero-mesh::after {
+  width: 480px;
+  height: 480px;
+  top: 10%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(15, 138, 138, 0.35) 0%, transparent 70%);
+  animation: meshFloat2 22s ease-in-out infinite;
+}
+
+button,
+a[role="button"] {
+  transition: transform 160ms var(--ease-out), opacity 200ms var(--ease-out);
+}
+button:active,
+a[role="button"]:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
