@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { B12_PASTELS } from "./Nav";
+import { B12_PASTELS } from "@/lib/palette";
 
 const PRODUCTS = [
   { href: "https://boss.ceo", name: "BOSS", external: true },

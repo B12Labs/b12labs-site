@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
+import { B12_PASTELS } from "@/lib/palette";
 
 /**
  * Each link carries its own pastel identity — a small dot under the active
@@ -11,20 +12,11 @@ import { Logo } from "./Logo";
  * coral / pink). This is the one thing people will remember about the nav.
  */
 const LINKS = [
-  { href: "/products", label: "Products", pastel: "#A7E8D4" }, // soft teal
-  { href: "/research", label: "Research", pastel: "#CFC8F7" }, // soft violet
-  { href: "/about", label: "About", pastel: "#F5E6B8" }, // soft amber
-  { href: "/careers", label: "Careers", pastel: "#F5B89E" }, // soft coral
+  { href: "/products", label: "Products", pastel: B12_PASTELS[0] },
+  { href: "/research", label: "Research", pastel: B12_PASTELS[1] },
+  { href: "/about", label: "About", pastel: B12_PASTELS[2] },
+  { href: "/careers", label: "Careers", pastel: B12_PASTELS[3] },
 ];
-
-/** The five pastels used across the site — exported so the Footer can re-use. */
-export const B12_PASTELS = [
-  "#A7E8D4",
-  "#CFC8F7",
-  "#F5E6B8",
-  "#F5B89E",
-  "#F3C4E2",
-] as const;
 
 function BrandMark() {
   return (
