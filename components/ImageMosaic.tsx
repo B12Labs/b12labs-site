@@ -23,7 +23,7 @@ export function ImageMosaic() {
       className="fixed inset-0 -z-10 pointer-events-none motion-reduce:opacity-[0.04]"
     >
       <div
-        className="absolute inset-0 grid gap-0 opacity-[0.10] dark:opacity-[0.06]"
+        className="absolute inset-0 grid gap-0 opacity-[0.06] dark:opacity-[0.04]"
         style={{
           gridTemplateColumns: "repeat(auto-fill, minmax(96px, 1fr))",
           gridAutoRows: "96px",
